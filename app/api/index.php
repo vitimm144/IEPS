@@ -9,20 +9,40 @@ session_start();
 use Respect\Rest\Router;
 
 $r3 = new Router('/api');
-
+class conexao {
+  private $pass = 123;
+  private $user = 'ieps';
+  private $banco = 'localhost';
+  private $consulta = '';
+  private $link = '';
+  private $db = '';
+  
+  public function get_banco(){
+    return $this->banco;
+  }
+  
+  public function conexao (){
+    $this->conectar();
+  }
+  public function conectar(){
+    $this->link = mysql_connect($this->banco, $this->user, $this->pass );
+    if(!$this->link){
+      die('Problema na conexão com o Mysql'); 
+    }else if(!mysql_select_db($this->db, $this->link)){
+      die('Problemas na conexão com o banco');
+    }
+  }
+  public function desconectar(){
+    mysql_close($this->link);     
+  }
+}
 
 $r3->any('/connect', function(){
-  $pass = '123';
-  $user = 'ieps';
-  try{
-      $conexao  = mysql_connect('localhost', $user, $pass );
-      echo $conexao;
-      header('HTTP/1.1 200');
-
-  }  catch (Exception $e){
-        echo $e;
+  $obj_conexao = new conexao();
+  if(!$obj_conexao){
+    echo 'deu ruim';
   }
-  mysql_close($conexao);     
+  $obj_conexao->desconectar();
 });
 //$r3->any('/login', function() {
 //          $data = json_decode(file_get_contents('php://input'), true);
