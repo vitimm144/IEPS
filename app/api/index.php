@@ -1,5 +1,6 @@
 <?php
 
+include ( 'conexao.php' );
 require 'vendor/autoload.php';
     
 ini_set("display_errors", 1);
@@ -9,38 +10,11 @@ session_start();
 use Respect\Rest\Router;
 
 $r3 = new Router('/api');
-class conexao {
-  private $pass = 123;
-  private $user = 'ieps';
-  private $banco = 'localhost';
-  private $consulta = '';
-  private $link = '';
-  private $db = '';
-  
-  public function get_banco(){
-    return $this->banco;
-  }
-  
-  public function conexao (){
-    $this->conectar();
-  }
-  public function conectar(){
-    $this->link = mysql_connect($this->banco, $this->user, $this->pass );
-    if(!$this->link){
-      die('Problema na conexão com o Mysql'); 
-    }else if(!mysql_select_db($this->db, $this->link)){
-      die('Problemas na conexão com o banco');
-    }
-  }
-  public function desconectar(){
-    mysql_close($this->link);     
-  }
-}
 
 $r3->any('/connect', function(){
   $obj_conexao = new conexao();
   if(!$obj_conexao){
-    echo 'deu ruim';
+    die ('Sem conexao com o banco');
   }
   $obj_conexao->desconectar();
 });
