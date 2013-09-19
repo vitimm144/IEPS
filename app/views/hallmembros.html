@@ -1,0 +1,31 @@
+<div class="hero-unit">
+<form class="form-horizontal" name="hall_membros">
+  <fieldset>
+    <legend>Informações Pessoais</legend>
+    <label class="">Nome</label>
+    <input class="" name="nome" data-ng-model="membro.nome"/>
+    
+    <label>Logradouro</label>
+    <input name="logradouro" data-ng-model="endereco.logradouro"/>
+    <label>Número</label>
+    <input name="numero" data-ng-model="endereco.numero"/>
+    <label>Bairro</label>
+    <input name="bairro" data-ng-model="endereco.bairro"/>
+    <label>Complemento</label>
+    <input name="complemento" data-ng-model="endereco.complemento"/>
+    <label>CEP</label>
+    <input name="cep" data-ng-model="endereco.cep"/>
+    <label>Profissão</label>
+    <input name="profissao" data-ng-model="membro.profissao"/>
+    <label>Sexo</label>
+    <select name="sexo" data-ng-model="membro.sexo">
+      <option>Maculino</option>
+      <option>Feminino</option>
+    </select>
+    <label>RG</label>
+    <input name="rg" data-ng-model="membro.rg"/>
+    
+  </fieldset>
+  <button class="btn btn-primary"> Enviar </button>
+</form>
+</div>
