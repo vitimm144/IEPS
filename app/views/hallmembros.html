@@ -38,8 +38,6 @@
     <input name="tipo_sanguineo" data-ng-model="membro.tipo_sanguineo"/>
     <label>Data de Nascimento</label>
     <input name="data_nascimento" data-ng-model="membro.data_nascimento"/>
-    <label>Data de Nascimento</label>
-    <input name="data_nascimento" data-ng-model="membro.data_nascimento"/>
     <label>Estado Civil</label>
     <select name="estado_civil" data-ng-model="historico_familiar.estado_civil">
       <option>Solteiro(a)</option>
@@ -71,6 +69,26 @@
     <input type="file" name="anexo" data-ng-model="teologia.anexo"/>
     
     <h4> Histórico Eclesiastico </h4>
+    <label> Data Conversão </label>
+    <input 
+      type="text"
+      name="data_conversao"
+      data-ng-model="historico_eclesiastico.data_conversao"
+    />
+    <label> Data Batismo </label>
+    <input 
+      type="text"
+      name="data_batismo"
+      data-ng-model="historico_eclesiastico.data_batismo"
+    />
+    <label> Cargo </label>
+    <input type="text" name="cargo" data-ng-model="cargo.cargo"/>
+    <label> Data Consagração </label>
+    <input type="text" name="data_consagracao" data-ng-model="cargo.data_consagracao"/>
+    <label> Igreja </label>
+    <input type="text" name="igreja" data-ng-model="cargo.igreja"/>
+    <label> Cidade </label>
+    <input type="text" name="cargo_cidade" data-ng-model="cargo.cidade"/>
     
   </fieldset>
   <button class="btn btn-primary"> Enviar </button>
