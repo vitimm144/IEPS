@@ -56,26 +56,34 @@ try {
     cep VARCHAR(15), 
     PRIMARY KEY(id_endereco) );');
   
-  $obj_conect->query('CREATE TABLE dados_pessoais(
-    matricula INTEGER UNSIGNED NOT NULL AUTO_INCREMENT, 
-    nome VARCHAR(30),
-    id_endereco INTEGER UNSIGNED NOT NULL, 
-    profissao VARCHAR(20), 
-    sexo VARCHAR(10),
-    rg VARCHAR(15), 
-    id_contato INTEGER UNSIGNED NOT NULL, 
-    tipo_sanguineo VARCHAR(2), 
-    data_nascimento DATE, 
+  $obj_conect->query('CREATE TABLE historico_familiar(
+    id_historico_familiar INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     estado_civil VARCHAR(10), 
     data_casamento DATE, 
     nome_conjuje VARCHAR(40),
     filhos INTEGER, 
     nr_filhos INTEGER, 
+    PRIMARY KEY(id_historico_familiar)
+    );');
+  
+  $obj_conect->query('CREATE TABLE dados_pessoais(
+    matricula INTEGER UNSIGNED NOT NULL AUTO_INCREMENT, 
+    nome VARCHAR(30),
+    rg VARCHAR(15), 
+    sexo VARCHAR(10),
+    data_nascimento DATE, 
+    tipo_sanguineo VARCHAR(2), 
     nome_mae VARCHAR(40),
+    profissao VARCHAR(20), 
     nome_pai VARCHAR(40),
+    id_historico_familiar INTEGER UNSIGNED NOT NULL, 
+    id_endereco INTEGER UNSIGNED NOT NULL, 
+    id_contato INTEGER UNSIGNED NOT NULL, 
     id_hist_eclesiastico INTEGER UNSIGNED NOT NULL, 
     id_teologia INTEGER UNSIGNED NOT NULL, 
     PRIMARY KEY(matricula),
+    FOREIGN KEY(id_historico_familiar)
+    REFERENCES historico_familiar(id_historico_familiar),
     FOREIGN KEY(id_endereco)
     REFERENCES endereco(id_endereco),
     FOREIGN KEY(id_contato)
@@ -84,6 +92,8 @@ try {
     REFERENCES historico_eclesiastico(id_hist_eclesiastico),
     FOREIGN KEY(id_teologia)
     REFERENCES teologia(id_teologia) );');
+  
+  
   
   $obj_conect->query('CREATE TABLE info_adm(
     id_info_adm INTEGER UNSIGNED NOT NULL AUTO_INCREMENT, 
