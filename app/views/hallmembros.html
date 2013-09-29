@@ -24,8 +24,57 @@
     </select>
     <label>RG</label>
     <input name="rg" data-ng-model="membro.rg"/>
+    <label>Telefone Residencial</label>
+    <input name="residencial" data-ng-model="contato.residencial"/>
+    <label>Celular</label>
+    <input name="celular1" data-ng-model="contato.celular1"/>
+    <label>Celular</label>
+    <input name="celular2" data-ng-model="contato.celular2"/>
+    <label>E-mail</label>
+    <input name="email" data-ng-model="contato.email"/>
+    <label>Facebook</label>
+    <input name="facebook" data-ng-model="contato.facebook"/>
+    <label>Tipo Sanguíneo</label>
+    <input name="tipo_sanguineo" data-ng-model="membro.tipo_sanguineo"/>
+    <label>Data de Nascimento</label>
+    <input name="data_nascimento" data-ng-model="membro.data_nascimento"/>
+    <label>Data de Nascimento</label>
+    <input name="data_nascimento" data-ng-model="membro.data_nascimento"/>
+    <label>Estado Civil</label>
+    <select name="estado_civil" data-ng-model="historico_familiar.estado_civil">
+      <option>Solteiro(a)</option>
+      <option>Casado(a)</option>
+      <option>Divorciado(a)</option>
+      <option>Viúvo(a)</option>
+    </select>
+    <label>Data de Casamento</label>
+    <input name="data_casamento" data-ng-model="historico_familiar.data_casamento"/>
+    <label>Nome Conjuje</label>
+    <input name="nome_conjuje" data-ng-model="historico_familiar.nome_conjuje"/>
+    <label>Filhos ?</label>
+    <input type="checkbox" name="filhos" data-ng-model="historico_familiar.filhos"/>
+    <label> Nr Filhos </label>
+    <input type="number" name="nr_filhos" data-ng-model="historico_familiar.nr_filhos"/>
+    <label> Nome Pai </label>
+    <input type="text" name="nome_pai" data-ng-model="membro.nome_pai"/>
+    <label> Nome Mãe </label>
+    <input type="text" name="nome_mae" data-ng-model="membro.nome_mae"/>
+    
+    <h4> Teologia </h4>
+    <label> Curso </label>
+    <input type="text" name="curso" data-ng-model="teologia.curso"/>
+    <label> Instituição </label>
+    <input type="text" name="instituicao" data-ng-model="teologia.instituicao"/>
+    <label> Duração </label>
+    <input type="text" name="duracao" data-ng-model="teologia.duracao"/>
+    <label> Anexos </label>
+    <input type="file" name="anexo" data-ng-model="teologia.anexo"/>
+    
+    <h4> Histórico Eclesiastico </h4>
     
   </fieldset>
   <button class="btn btn-primary"> Enviar </button>
+  <button class="btn btn-warning" type="reset"> Limpar</button>
+  <a class='btn btn-danger' href="#/"> Cancelar</a>
 </form>
 </div>
