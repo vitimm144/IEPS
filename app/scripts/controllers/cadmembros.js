@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('IEPSApp')
-  .controller('HallmembrosCtrl', function ($scope) {
+  .controller('CadmembrosCtrl', function ($scope) {
     $scope.membro = {
       nome : '',
       rg : '',

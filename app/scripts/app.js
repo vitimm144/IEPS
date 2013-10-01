@@ -8,8 +8,8 @@ angular.module('IEPSApp', [])
         controller: 'MainCtrl'
       })
       .when('/hallmembros', {
-        templateUrl: 'views/hallmembros.html',
-        controller: 'HallmembrosCtrl'
+        templateUrl: 'views/cadmembros.html',
+        controller: 'CadmembrosCtrl'
       })
       .otherwise({
         redirectTo: '/'
