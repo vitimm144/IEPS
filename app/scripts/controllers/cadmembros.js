@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('IEPSApp')
-  .controller('CadmembrosCtrl', function ($scope) {
+  .controller('CadmembrosCtrl', function ($scope, $http) {
     $scope.cadastro = {};
     $scope.cadastro.membro = {
       nome : '',
@@ -52,6 +52,12 @@ angular.module('IEPSApp')
       cidade : ''
     };
     $scope.salvar = function(){
-      
+      $http.post('api/salvar', $scope.cadastro)
+//        .success(function(){
+//          console.log('salvou');
+//        })
+  //      .error(function(){
+  //        console.log( 'nao salvou ');  
+  //      });
     };
   });
