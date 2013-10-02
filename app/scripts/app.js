@@ -7,7 +7,7 @@ angular.module('IEPSApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/hallmembros', {
+      .when('/cadmembros', {
         templateUrl: 'views/cadmembros.html',
         controller: 'CadmembrosCtrl'
       })
