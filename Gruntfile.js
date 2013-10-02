@@ -99,6 +99,7 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
+          port: 9001,
           middleware: function (connect) {
             return [
               mountFolder(connect, '.tmp'),
@@ -327,7 +328,11 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
-        singleRun: true
+        singleRun: false
+      },
+      e2e: {
+        configFile: 'karma-e2e.conf.js',
+        singleRun: false
       }
     },
     cdnify: {
