@@ -1,8 +1,9 @@
 'use strict';
-
+/*camelcase : false*/
 angular.module('IEPSApp')
-  .controller('CadmembrosCtrl', function ($scope, $http) {
+  .controller('CadmembrosCtrl', function ($scope, $http, Restangular) {
     $scope.cadastro = {};
+    var cadastro = Restangular.all('cadastro');
     $scope.cadastro.membro = {
       nome : '',
       rg : '',
@@ -52,12 +53,12 @@ angular.module('IEPSApp')
       cidade : ''
     };
     $scope.salvar = function(){
-      $http.post('api/salvar', $scope.cadastro)
-//        .success(function(){
-//          console.log('salvou');
-//        })
-  //      .error(function(){
-  //        console.log( 'nao salvou ');  
-  //      });
+      console.log('entrou em salvar');
+      cadastro.post($scope.cadastro).then(function(){
+        console.log('salvou');
+        console.log(data);
+      }, function(){
+          console.log( 'nao salvou ');  
+      });
     };
   });

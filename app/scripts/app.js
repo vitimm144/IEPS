@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('IEPSApp', [])
+angular.module('IEPSApp', ['restangular'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
