@@ -4,7 +4,7 @@ angular.module('IEPSApp')
   .controller('CadmembrosCtrl', function ($scope, $http, Restangular) {
     $scope.cadastro = {};
     var cadastro = Restangular.all('cadastro');
-    $scope.cadastro.membro = {
+     $scope.cadastro.membro = {
       nome : '',
       rg : '',
       profissao : '',
@@ -53,10 +53,7 @@ angular.module('IEPSApp')
       cidade : ''
     };
     $scope.salvar = function(){
-      console.log('entrou em salvar');
-      cadastro.post($scope.cadastro).then(function(){
-        console.log('salvou');
-        console.log(data);
+      cadastro.post($scope.cadastro).then(function(data){
       }, function(){
           console.log( 'nao salvou ');  
       });

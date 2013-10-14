@@ -4,19 +4,30 @@ describe('Controller: CadmembrosCtrl', function () {
 
   // load the controller's module
   beforeEach(module('IEPSApp'));
-
+  
   var CadmembrosCtrl,   
-    $http,
+    Restangular,
+    cadastro,
+    $httpBackend,
+    $q,
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$http_) {
+  beforeEach(inject(function ($controller, $rootScope, _Restangular_, _$httpBackend_,_$q_) {
     scope = $rootScope.$new();
-    $http = _$http_;
+    Restangular = _Restangular_;
+    $httpBackend = _$httpBackend_;
+    $q = _$q_;
+    
+    cadastro = Restangular.all('cadastro');
     CadmembrosCtrl = $controller('CadmembrosCtrl', {
-      $scope: scope
+      $scope: scope 
     });
   }));
+  afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+  });
 
   it('verificar definição do objeto cadastro', function () {
     expect(scope.cadastro).toBeDefined();
@@ -79,10 +90,14 @@ describe('Controller: CadmembrosCtrl', function () {
   it('verificar definição da função salvar', function () {
     expect(scope.salvar).toBeDefined();
   });
-  it('verificar se função salvar está fazendo requisição quando chamada', function () {
-    spyOn($http, 'post');
+  xit('verificar se função salvar está fazendo requisição quando chamada', function () {
+    spyOn(cadastro, 'post');
+    spyOn(scope, 'salvar').andCallThrough();
+    scope.cadastro = {abc:123};
+    $httpBackend.expectPOST('api/cadastro').respond('ok');
     scope.salvar();
-    expect($http.post.calls.length).toBe(1);
+    $httpBackend.flush();
+    expect(cadastro.post.calls.length).toBe(1);
   });
   
 });

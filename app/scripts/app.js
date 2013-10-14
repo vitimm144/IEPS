@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('IEPSApp', ['restangular'])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, RestangularProvider) {
+    RestangularProvider.setBaseUrl('api');
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
