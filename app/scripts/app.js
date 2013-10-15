@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('IEPSApp', ['restangular'])
+angular.module('IEPSApp', ['restangular','ngRoute'])
   .config(function ($routeProvider, RestangularProvider) {
     RestangularProvider.setBaseUrl('api');
     $routeProvider
