@@ -49,7 +49,7 @@ try {
   
   $obj_conect->query('CREATE TABLE endereco(
     id_endereco INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    logradouro VARCHAR(10),
+    logradouro VARCHAR(50),
     numero VARCHAR(10),
     bairro VARCHAR(10), 
     complemento VARCHAR(10),
