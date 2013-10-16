@@ -3,92 +3,92 @@
   <fieldset>
     <legend>Informações Pessoais</legend>
     <label class="">Nome</label>
-    <input class="" name="nome" data-ng-model="membro.nome"/>
+    <input class="" name="nome" data-ng-model="cadastro.membro.nome"/>
     
     <label>Logradouro</label>
-    <input name="logradouro" data-ng-model="endereco.logradouro"/>
+    <input name="logradouro" data-ng-model="cadastro.endereco.logradouro"/>
     <label>Número</label>
-    <input name="numero" data-ng-model="endereco.numero"/>
+    <input name="numero" data-ng-model="cadastro.endereco.numero"/>
     <label>Bairro</label>
-    <input name="bairro" data-ng-model="endereco.bairro"/>
+    <input name="bairro" data-ng-model="cadastro.endereco.bairro"/>
     <label>Complemento</label>
-    <input name="complemento" data-ng-model="endereco.complemento"/>
+    <input name="complemento" data-ng-model="cadastro.endereco.complemento"/>
     <label>CEP</label>
-    <input name="cep" data-ng-model="endereco.cep"/>
+    <input name="cep" data-ng-model="cadastro.endereco.cep"/>
     <label>Profissão</label>
-    <input name="profissao" data-ng-model="membro.profissao"/>
+    <input name="profissao" data-ng-model="cadastro.membro.profissao"/>
     <label>Sexo</label>
-    <select name="sexo" data-ng-model="membro.sexo">
+    <select name="sexo" data-ng-model="cadastro.membro.sexo">
       <option>Maculino</option>
       <option>Feminino</option>
     </select>
     <label>RG</label>
-    <input name="rg" data-ng-model="membro.rg"/>
+    <input name="rg" data-ng-model="cadastro.membro.rg"/>
     <label>Telefone Residencial</label>
-    <input name="residencial" data-ng-model="contato.residencial"/>
+    <input name="residencial" data-ng-model="cadastro.contato.residencial"/>
     <label>Celular</label>
-    <input name="celular1" data-ng-model="contato.celular1"/>
+    <input name="celular1" data-ng-model="cadastro.contato.celular1"/>
     <label>Celular</label>
-    <input name="celular2" data-ng-model="contato.celular2"/>
+    <input name="celular2" data-ng-model="cadastro.contato.celular2"/>
     <label>E-mail</label>
-    <input name="email" data-ng-model="contato.email"/>
+    <input name="email" data-ng-model="cadastro.contato.email"/>
     <label>Facebook</label>
-    <input name="facebook" data-ng-model="contato.facebook"/>
+    <input name="facebook" data-ng-model="cadastro.contato.facebook"/>
     <label>Tipo Sanguíneo</label>
-    <input name="tipo_sanguineo" data-ng-model="membro.tipo_sanguineo"/>
+    <input name="tipo_sanguineo" data-ng-model="cadastro.membro.tipo_sanguineo"/>
     <label>Data de Nascimento</label>
-    <input name="data_nascimento" data-ng-model="membro.data_nascimento"/>
+    <input name="data_nascimento" data-ng-model="cadastro.membro.data_nascimento"/>
     <label>Estado Civil</label>
-    <select name="estado_civil" data-ng-model="historico_familiar.estado_civil">
+    <select name="estado_civil" data-ng-model="cadastro.historico_familiar.estado_civil">
       <option>Solteiro(a)</option>
       <option>Casado(a)</option>
       <option>Divorciado(a)</option>
       <option>Viúvo(a)</option>
     </select>
     <label>Data de Casamento</label>
-    <input name="data_casamento" data-ng-model="historico_familiar.data_casamento"/>
+    <input name="data_casamento" data-ng-model="cadastro.historico_familiar.data_casamento"/>
     <label>Nome Conjuje</label>
-    <input name="nome_conjuje" data-ng-model="historico_familiar.nome_conjuje"/>
+    <input name="nome_conjuje" data-ng-model="cadastro.historico_familiar.nome_conjuje"/>
     <label>Filhos ?</label>
-    <input type="checkbox" name="filhos" data-ng-model="historico_familiar.filhos"/>
+    <input type="checkbox" name="filhos" data-ng-model="cadastro.historico_familiar.filhos"/>
     <label> Nr Filhos </label>
-    <input type="number" name="nr_filhos" data-ng-model="historico_familiar.nr_filhos"/>
+    <input type="number" name="nr_filhos" data-ng-model="cadastro.historico_familiar.nr_filhos"/>
     <label> Nome Pai </label>
-    <input type="text" name="nome_pai" data-ng-model="membro.nome_pai"/>
+    <input type="text" name="nome_pai" data-ng-model="cadastro.membro.nome_pai"/>
     <label> Nome Mãe </label>
-    <input type="text" name="nome_mae" data-ng-model="membro.nome_mae"/>
+    <input type="text" name="nome_mae" data-ng-model="cadastro.membro.nome_mae"/>
     
     <h4> Teologia </h4>
     <label> Curso </label>
-    <input type="text" name="curso" data-ng-model="teologia.curso"/>
+    <input type="text" name="curso" data-ng-model="cadastro.teologia.curso"/>
     <label> Instituição </label>
-    <input type="text" name="instituicao" data-ng-model="teologia.instituicao"/>
+    <input type="text" name="instituicao" data-ng-model="cadastro.teologia.instituicao"/>
     <label> Duração </label>
-    <input type="text" name="duracao" data-ng-model="teologia.duracao"/>
+    <input type="text" name="duracao" data-ng-model="cadastro.teologia.duracao"/>
     <label> Anexos </label>
-    <input type="file" name="anexo" data-ng-model="teologia.anexo"/>
+    <input type="file" name="anexo" data-ng-model="cadastro.teologia.anexo"/>
     
     <h4> Histórico Eclesiastico </h4>
     <label> Data Conversão </label>
     <input 
       type="text"
       name="data_conversao"
-      data-ng-model="historico_eclesiastico.data_conversao"
+      data-ng-model="cadastro.historico_eclesiastico.data_conversao"
     />
     <label> Data Batismo </label>
     <input 
       type="text"
       name="data_batismo"
-      data-ng-model="historico_eclesiastico.data_batismo"
+      data-ng-model="cadastro.historico_eclesiastico.data_batismo"
     />
     <label> Cargo </label>
-    <input type="text" name="cargo" data-ng-model="cargo.cargo"/>
+    <input type="text" name="cargo" data-ng-model="cadastro.cargo.cargo"/>
     <label> Data Consagração </label>
-    <input type="text" name="data_consagracao" data-ng-model="cargo.data_consagracao"/>
+    <input type="text" name="data_consagracao" data-ng-model="cadastro.cargo.data_consagracao"/>
     <label> Igreja </label>
-    <input type="text" name="igreja" data-ng-model="cargo.igreja"/>
+    <input type="text" name="igreja" data-ng-model="cadastro.cargo.igreja"/>
     <label> Cidade </label>
-    <input type="text" name="cargo_cidade" data-ng-model="cargo.cidade"/>
+    <input type="text" name="cargo_cidade" data-ng-model="cadastro.cargo.cidade"/>
     
   </fieldset>
   <button class="btn btn-primary" data-ng-click="salvar()"> Enviar </button>
