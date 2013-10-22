@@ -4,7 +4,7 @@ angular.module('IEPSApp')
   .controller('CadmembrosCtrl', function ($scope, $http, Restangular) {
     $scope.cadastro = {};
     var cadastro = Restangular.all('cadastro');
-     $scope.cadastro.membro = {
+    $scope.cadastro.membro = {
       nome : '',
       rg : '',
       profissao : '',
@@ -13,13 +13,12 @@ angular.module('IEPSApp')
       data_nascimento : new Date(),
       nome_pai : '',
       nome_mae : ''
-      
     };
     $scope.cadastro.teologia = {
       curso : '',
       instituicao : '',
       duracao : '',
-      anexo : ''
+      anexo : null
     };
     $scope.cadastro.historico_familiar = {
       estado_civil : '',
