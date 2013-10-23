@@ -69,22 +69,21 @@ $r3->post('/cadastro', function(){
 //              .$data->teologia->anexos.");"
 //  );
   try{
-    $date = date_create_from_format('Y-m-d', $data->cargo->data_consagracao );
-    $id_cargo = $obj_conexao->query('SELECT id_cargo FROM cargo WHERE '
+    $date = new DateTime( $data->cargo->data_consagracao );
+    $id_cargo = $obj_conexao->query( 'SELECT id_cargo FROM cargo WHERE '
             . 'cargo="'.$data->cargo->cargo.'" AND '
-//            .'data_consagracao ="'.$date->format('Y-m-d').'" AND '
-            . 'igreja="'.$data->cargo->igreja.'"');
-    
-    $array = mysql_fetch_assoc($id_cargo);
-    $nr_linhas = mysql_num_rows($id_cargo);
-  }  catch (Exception $e ) {
+            . 'data_consagracao ="'.$date->format( 'Y-m-d' ).'" AND '
+            . 'igreja="'.$data->cargo->igreja.'"' );
+    $array = mysql_fetch_assoc( $id_cargo );
+    $nr_linhas = mysql_num_rows( $id_cargo );
+  }  catch ( Exception $e ) {
     echo $e.'Erro em adicionar chave estrangeira de cargo';
   }
+  
+  
   $obj_conexao->desconectar();
-//  echo  $nr_linhas;
-  echo  $date;
-  return json_encode($array);
-//  return $id_cargo;
+return json_encode( $array['id_cargo'] );
+//  return $date;
 });
 
 
