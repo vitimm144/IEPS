@@ -60,15 +60,16 @@ $r3->post('/cadastro', function(){
               .$data->historico_familiar->filhos.","
               .$data->historico_familiar->nr_filhos.");"
   );
-//  $obj_conexao->query(
-//          //TODO tratamento do tipo BLOB
-//          "INSERT INTO teologia(curso, instituicao, duracao, anexos)
-//            VALUES('".$data->teologia->curso."','"
-//              .$data->teologia->instituicao."','"
-//              .$data->teologia->duracao."',"
-//              .$data->teologia->anexos.");"
-//  );
+  $obj_conexao->query(
+          //TODO tratamento do tipo BLOB
+          "INSERT INTO teologia(curso, instituicao, duracao, anexos)
+            VALUES('".$data->teologia->curso."','"
+              .$data->teologia->instituicao."','"
+              .$data->teologia->duracao."',"
+              .$data->teologia->anexo.");"
+  );
   try{
+    date_default_timezone_set('UTC');
     $date = new DateTime( $data->cargo->data_consagracao );
     $id_cargo = $obj_conexao->query( 'SELECT id_cargo FROM cargo WHERE '
             . 'cargo="'.$data->cargo->cargo.'" AND '
@@ -76,12 +77,19 @@ $r3->post('/cadastro', function(){
             . 'igreja="'.$data->cargo->igreja.'"' );
     $array = mysql_fetch_assoc( $id_cargo );
     $nr_linhas = mysql_num_rows( $id_cargo );
+    $id_cargo_1 = $array['id_cargo'];
   }  catch ( Exception $e ) {
-    echo $e.'Erro em adicionar chave estrangeira de cargo';
+    echo $e.'Erro em buscar chave estrangeira de cargo';
   }
-  
+  $obj_conexao->query(
+    "INSERT INTO historico_eclesiastico(data_conversao, data_batismo, id_cargo)
+      VALUES('".$data->historico_eclesiastico->data_conversao."','"
+        .$data->historico_eclesiastico->data_batismo."',"
+        .$id_cargo_1.");"
+  );
   
   $obj_conexao->desconectar();
+echo $data->teologia->anexo;
 return json_encode( $array['id_cargo'] );
 //  return $date;
 });
