@@ -15,10 +15,10 @@ try {
   
   $obj_conect->query('CREATE TABLE cargo(
     id_cargo INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    cargo VARCHAR(20),
+    cargo VARCHAR(30),
     data_consagracao DATE,
     igreja VARCHAR(40),
-    cidade VARCHAR(20), 
+    cidade VARCHAR(30), 
     PRIMARY KEY(id_cargo) );');
   
   $obj_conect->query('CREATE TABLE historico_eclesiastico (
@@ -50,15 +50,15 @@ try {
   $obj_conect->query('CREATE TABLE endereco(
     id_endereco INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     logradouro VARCHAR(50),
-    numero VARCHAR(10),
-    bairro VARCHAR(10), 
-    complemento VARCHAR(10),
-    cep VARCHAR(15), 
+    numero VARCHAR(30),
+    bairro VARCHAR(30), 
+    complemento VARCHAR(30),
+    cep VARCHAR(20), 
     PRIMARY KEY(id_endereco) );');
   
   $obj_conect->query('CREATE TABLE historico_familiar(
     id_historico_familiar INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    estado_civil VARCHAR(10), 
+    estado_civil VARCHAR(15), 
     data_casamento DATE, 
     nome_conjuje VARCHAR(40),
     filhos INTEGER, 
@@ -69,18 +69,18 @@ try {
   $obj_conect->query('CREATE TABLE dados_pessoais(
     matricula INTEGER UNSIGNED NOT NULL AUTO_INCREMENT, 
     nome VARCHAR(30),
-    rg VARCHAR(15), 
-    sexo VARCHAR(10),
+    rg VARCHAR(20), 
+    sexo VARCHAR(15),
     data_nascimento DATE, 
-    tipo_sanguineo VARCHAR(2), 
+    tipo_sanguineo VARCHAR(10), 
     nome_mae VARCHAR(40),
-    profissao VARCHAR(20), 
+    profissao VARCHAR(40), 
     nome_pai VARCHAR(40),
-    id_historico_familiar INTEGER UNSIGNED NOT NULL, 
-    id_endereco INTEGER UNSIGNED NOT NULL, 
-    id_contato INTEGER UNSIGNED NOT NULL, 
-    id_hist_eclesiastico INTEGER UNSIGNED NOT NULL, 
-    id_teologia INTEGER UNSIGNED NOT NULL, 
+    id_historico_familiar INTEGER UNSIGNED, 
+    id_endereco INTEGER UNSIGNED, 
+    id_contato INTEGER UNSIGNED, 
+    id_hist_eclesiastico INTEGER UNSIGNED, 
+    id_teologia INTEGER UNSIGNED, 
     PRIMARY KEY(matricula),
     FOREIGN KEY(id_historico_familiar)
     REFERENCES historico_familiar(id_historico_familiar),
@@ -105,7 +105,7 @@ try {
     igreja_anterior VARCHAR(40),
     observacao VARCHAR(50), 
     data_ultima_atualizacao DATE, 
-    status_membro VARCHAR(20), 
+    status_membro VARCHAR(40), 
     PRIMARY KEY(id_info_adm),
     FOREIGN KEY(matricula) 
     REFERENCES dados_pessoais(matricula) );');
