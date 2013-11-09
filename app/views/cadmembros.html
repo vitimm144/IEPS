@@ -3,7 +3,7 @@
   <fieldset>
     <legend>Informações Pessoais</legend>
     <label class="">Nome</label>
-    <input class="" name="nome" data-ng-model="cadastro.membro.nome"/>
+    <input class="" name="nome" data-ng-model="cadastro.dados_pessoais.nome"/>
     
     <label>Logradouro</label>
     <input name="logradouro" data-ng-model="cadastro.endereco.logradouro"/>
@@ -16,14 +16,14 @@
     <label>CEP</label>
     <input name="cep" data-ng-model="cadastro.endereco.cep"/>
     <label>Profissão</label>
-    <input name="profissao" data-ng-model="cadastro.membro.profissao"/>
+    <input name="profissao" data-ng-model="cadastro.dados_pessoais.profissao"/>
     <label>Sexo</label>
-    <select name="sexo" data-ng-model="cadastro.membro.sexo">
+    <select name="sexo" data-ng-model="cadastro.dados_pessoais.sexo">
       <option>Masculino</option>
       <option>Feminino</option>
     </select>
     <label>RG</label>
-    <input name="rg" data-ng-model="cadastro.membro.rg"/>
+    <input name="rg" data-ng-model="cadastro.dados_pessoais.rg"/>
     <label>Telefone Residencial</label>
     <input name="residencial" data-ng-model="cadastro.contato.residencial"/>
     <label>Celular</label>
@@ -35,15 +35,15 @@
     <label>Facebook</label>
     <input name="facebook" data-ng-model="cadastro.contato.facebook"/>
     <label>Tipo Sanguíneo</label>
-    <input name="tipo_sanguineo" data-ng-model="cadastro.membro.tipo_sanguineo"/>
+    <input name="tipo_sanguineo" data-ng-model="cadastro.dados_pessoais.tipo_sanguineo"/>
     <label>Data de Nascimento</label>
-    <input name="data_nascimento" data-ng-model="cadastro.membro.data_nascimento"/>
+    <input name="data_nascimento" data-ng-model="cadastro.dados_pessoais.data_nascimento"/>
     <label>Estado Civil</label>
     <select name="estado_civil" data-ng-model="cadastro.historico_familiar.estado_civil">
-      <option>Solteiro(a)</option>
-      <option>Casado(a)</option>
-      <option>Divorciado(a)</option>
-      <option>Viúvo(a)</option>
+      <option> Solteiro(a) </option>
+      <option> Casado(a) </option>
+      <option> Divorciado(a) </option>
+      <option> Viúvo(a) </option>
     </select>
     <label>Data de Casamento</label>
     <input name="data_casamento" data-ng-model="cadastro.historico_familiar.data_casamento"/>
@@ -54,9 +54,9 @@
     <label> Nr Filhos </label>
     <input type="number" name="nr_filhos" data-ng-model="cadastro.historico_familiar.nr_filhos"/>
     <label> Nome Pai </label>
-    <input type="text" name="nome_pai" data-ng-model="cadastro.membro.nome_pai"/>
+    <input type="text" name="nome_pai" data-ng-model="cadastro.dados_pessoais.nome_pai"/>
     <label> Nome Mãe </label>
-    <input type="text" name="nome_mae" data-ng-model="cadastro.membro.nome_mae"/>
+    <input type="text" name="nome_mae" data-ng-model="cadastro.dados_pessoais.nome_mae"/>
     
     <h4> Teologia </h4>
     <label> Curso </label>
