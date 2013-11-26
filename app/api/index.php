@@ -18,6 +18,29 @@ $r3->any('/connect', function(){
   }
   $obj_conexao->desconectar();
 });
+
+//retorna um array contendo todos os usuários
+//cadastrados no sistema
+
+$r3->get('/membros', function(){
+  $obj_conexao = new conexao();
+  header('HTTP/1.1 200 Ok');
+  $get_membros = $obj_conexao->query(
+      'SELECT * FROM dados_pessoais'
+  );
+  $membros = array();
+  while ( $aux = mysql_fetch_assoc($get_membros)){
+    $membros[] = $aux; 
+  }
+  return json_encode($membros);
+});
+
+
+//********************************
+//requisição de cadastro de membros
+//********************************
+
+
 $r3->post('/cadastro', function(){
   $obj_conexao = new conexao();
   
@@ -104,6 +127,7 @@ $r3->post('/cadastro', function(){
             . 'igreja="'.$data->cargo->igreja.'"' );
     $array = mysql_fetch_assoc( $id_cargo );
     $id_cargo_1 = $array['id_cargo'];
+    mysql_free_result($array);
   }  catch ( Exception $e ) {
     echo $e.'Erro em buscar chave estrangeira de cargo';
   }
@@ -129,6 +153,7 @@ $r3->post('/cadastro', function(){
     );
     $endereco = mysql_fetch_assoc( $id_endereco );
     $id_endereco1 = $endereco['id_endereco'];
+    mysql_free_result($endereco);
   } catch (Exception $exc) {
     echo $exc->getTraceAsString();
   }
@@ -142,7 +167,7 @@ $r3->post('/cadastro', function(){
     );
     $teologia = mysql_fetch_assoc( $id_teologia );
     $id_teologia1 = $teologia['id_teologia'];
-
+    mysql_free_result($teologia);
   } catch (Exception $exc) {
     echo $exc->getTraceAsString();
   }
@@ -154,6 +179,7 @@ $r3->post('/cadastro', function(){
     );
     $contato = mysql_fetch_assoc( $id_contato );
     $id_contato1 = $contato['id_contato'];
+    mysql_free_result($contato);
   } catch (Exception $exc) {
     echo $exc->getTraceAsString();
   }
@@ -168,6 +194,7 @@ $r3->post('/cadastro', function(){
     );
     $historico_familiar = mysql_fetch_assoc( $id_historico_familiar );
     $id_historico_familiar1 = $historico_familiar['id_historico_familiar'];
+    mysql_free_result($historico_familiar);
   } catch (Exception $exc) {
     echo $exc->getTraceAsString();
   }
@@ -182,6 +209,7 @@ $r3->post('/cadastro', function(){
     );
     $historico_eclesiastico = mysql_fetch_assoc( $id_hist_eclesiastico );
     $id_hist_eclesiastico1 = $historico_eclesiastico['id_hist_eclesiastico'];
+    mysql_free_result($historico_eclesiastico);
   } catch (Exception $exc) {
     echo $exc->getTraceAsString();
   }
