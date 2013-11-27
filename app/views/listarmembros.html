@@ -1,0 +1,34 @@
+<div class="input-prepend">
+  <span class="add-on"><i class="icon-search"></i></span>
+  <input type="text"
+    placeholder=" busca " 
+    ng-model="search"
+    class="class"
+  />
+</div>
+<table class=" table table-striped table-bordered">
+  <thread>
+    <tr>
+      <th> <span> Nome </span> </th>
+      <th> <span> RG </span> </th>
+      <th> <span> Sexo </span> </th>
+      <th> <span> Data Nascimento </span> </th>
+      <th> <span> Tipo sanguíneo </span> </th>
+      <th> <span> Nome mãe </span> </th>
+      <th> <span> Profissão </span> </th>
+      <th> <span> Nome Pai </span> </th>
+    </tr>
+  </thread>
+  <tbody>
+    <tr ng-repeat="membro in membros | filter:search">
+      <td ng-bind="membro.nome"></td>
+      <td ng-bind="membro.rg"></td>
+      <td ng-bind="membro.sexo"></td>
+      <td ng-bind="membro.data_nascimento"></td>
+      <td ng-bind="membro.tipo_sanguineo"></td>
+      <td ng-bind="membro.nome_mae"></td>
+      <td ng-bind="membro.profissao"></td>
+      <td ng-bind="membro.nome_pai"></td>
+    </tr>
+  </tbody>
+</table>
