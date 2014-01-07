@@ -5,8 +5,8 @@
         <group>
             <file>file:/home/victor/devel/IEPS/app/api/index.php</file>
             <file>file:/home/victor/devel/IEPS/app/views/main.html</file>
-            <file>file:/home/victor/devel/IEPS/app/scripts/controllers/cadmembros.js</file>
             <file>file:/home/victor/devel/IEPS/app/index.html</file>
+            <file>file:/home/victor/devel/IEPS/Gruntfile.js</file>
             <file>file:/home/victor/devel/IEPS/app/views/listarmembros.html</file>
             <file>file:/home/victor/devel/IEPS/app/scripts/app.js</file>
             <file>file:/home/victor/devel/IEPS/app/scripts/controllers/listarmembros.js</file>
