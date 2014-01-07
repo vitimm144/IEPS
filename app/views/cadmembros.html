@@ -1,4 +1,4 @@
-<div class="hero-unit">
+<div>
 <form class="form-horizontal" name="hall_membros">
   <fieldset>
     <legend>Informações Pessoais</legend>
@@ -38,6 +38,9 @@
     <input name="tipo_sanguineo" data-ng-model="cadastro.dados_pessoais.tipo_sanguineo"/>
     <label>Data de Nascimento</label>
     <input name="data_nascimento" data-ng-model="cadastro.dados_pessoais.data_nascimento"/>
+  </fieldset>
+  <fieldset>
+    <legend> Histórico Familiar </legend>
     <label>Estado Civil</label>
     <select name="estado_civil" data-ng-model="cadastro.historico_familiar.estado_civil">
       <option> Solteiro(a) </option>
@@ -57,8 +60,9 @@
     <input type="text" name="nome_pai" data-ng-model="cadastro.dados_pessoais.nome_pai"/>
     <label> Nome Mãe </label>
     <input type="text" name="nome_mae" data-ng-model="cadastro.dados_pessoais.nome_mae"/>
-    
-    <h4> Teologia </h4>
+  </fieldset>
+  <fieldset>
+    <legend> Teologia </legend>
     <label> Curso </label>
     <input type="text" name="curso" data-ng-model="cadastro.teologia.curso"/>
     <label> Instituição </label>
@@ -67,8 +71,9 @@
     <input type="text" name="duracao" data-ng-model="cadastro.teologia.duracao"/>
     <label> Anexos </label>
     <input type="file" name="anexo" data-ng-model="cadastro.teologia.anexo"/>
-    
-    <h4> Histórico Eclesiastico </h4>
+  </fieldset>
+  <fieldset>
+    <legend> Histórico Eclesiastico </legend>
     <label> Data Conversão </label>
     <input 
       type="text"
