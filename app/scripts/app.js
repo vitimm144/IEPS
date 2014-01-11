@@ -1,18 +1,19 @@
 'use strict';
 
-angular.module('IEPSApp', ['restangular','ngRoute'])
-  .config(function ($routeProvider, RestangularProvider) {
+angular.module('IEPSApp', ['restangular','ngRoute','ui.router'])
+  .config(function ($stateProvider, $urlRouterProvider, RestangularProvider) {
     RestangularProvider.setBaseUrl('api');
-    $routeProvider
-      .when('/', {
+    
+    $urlRouterProvider.otherwise("/");
+    $stateProvider
+      .state('main', {
+        url: '/',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/cadmembros', {
-        templateUrl: 'views/cadmembros.html',
-        controller: 'CadmembrosCtrl'
-      })
-      .when('/listarmembros', {
+
+      .state('membros', {
+        url:'/membros',
         templateUrl: 'views/listarmembros.html',
         controller: 'ListarmembrosCtrl',
         resolve:{
@@ -25,7 +26,14 @@ angular.module('IEPSApp', ['restangular','ngRoute'])
           }]
         }
       })
-      .otherwise({
-        redirectTo: '/'
+      .state('membros.new', {
+        url: '/new',
+        templateUrl: 'views/cadmembros.html',
+        controller: 'CadmembrosCtrl'
+      })
+      .state('membros.edit', {
+        url:'/:id',
+        templateUrl: 'views/cadmembros.html',
+        controller: 'CadmembrosCtrl'
       });
   });

@@ -14,7 +14,7 @@
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
-</head>
+  </head>
   <body ng-app="IEPSApp">
     <!-- NAVBAR ================================================== -->
     <div class="navbar-wrapper">
@@ -34,14 +34,14 @@
             <div class="nav-collapse collapse">
               <ul class="nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#/cadmembros">Cadastro</a></li>
+                <li><a href="#/membros">Ver Membros</a></li>
+                <li><a href="#/membros/new">Cadastro</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twbs.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Hall de Membros</a></li>
-                    <li><a href="#/cadmembros">Cadastro de Membros</a></li>
+                    <li><a href="#/membros">Cadastro de Membros</a></li>
                     <li><a href="#">Something else here</a></li>
                     <li class="divider"></li>
                     <li class="nav-header">Nav header</li>
@@ -66,7 +66,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="container" ui-view></div>
 
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -94,6 +94,8 @@
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="bower_components/restangular/dist/restangular.js"></script>
         <script src="bower_components/lodash/dist/lodash.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
