@@ -329,11 +329,11 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js',
         singleRun: false
-      },
+      }/*,
       e2e: {
         configFile: 'karma-e2e.conf.js',
         singleRun: false
-      }
+      }*/
     },
     cdnify: {
       dist: {
