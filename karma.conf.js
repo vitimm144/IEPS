@@ -14,26 +14,26 @@ module.exports = function(config) {
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/restangular/dist/restangular.js',
-      'app/bower_components/lodash/lodash.js',
+      'app/bower_components/lodash/dist/lodash.js',
+      'app/bower_components/angular-ui-router/release/angular-ui-router.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
-      'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
-
+    
     // list of files / patterns to exclude
     exclude: [],
 
     // web server port
     port: 8080,
-	runnerPort : 9100,
+    runnerPort : 9100,
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-	// enable / disable colors in the output (reporters and logs)
-	colors : true,
+    // enable / disable colors in the output (reporters and logs)
+    colors : true,
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,

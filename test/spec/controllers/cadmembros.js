@@ -13,16 +13,20 @@ describe('Controller: CadmembrosCtrl', function () {
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _Restangular_, _$httpBackend_,_$q_) {
+  beforeEach(inject(function ($controller, $rootScope,
+  _Restangular_, _$httpBackend_,_$q_,$templateCache) {
     scope = $rootScope.$new();
     Restangular = _Restangular_;
     $httpBackend = _$httpBackend_;
     $q = _$q_;
-    
+    $templateCache.put('view/main.html', 'app/view/main.html');
     cadastro = Restangular.all('cadastro');
     CadmembrosCtrl = $controller('CadmembrosCtrl', {
       $scope: scope 
     });
+    $httpBackend.whenGET('views/main.html')
+            .respond($templateCache.get('view/main.html'));
+    $httpBackend.flush();
   }));
   afterEach(function() {
         $httpBackend.verifyNoOutstandingExpectation();
@@ -30,6 +34,7 @@ describe('Controller: CadmembrosCtrl', function () {
   });
 
   it('verificar definição do objeto cadastro', function () {
+    
     expect(scope.cadastro).toBeDefined();
     expect(scope.cadastro.membro).toBeDefined();
     expect(scope.cadastro.teologia).toBeDefined();
