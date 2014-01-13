@@ -1,10 +1,13 @@
 'use strict';
 
-angular.module('IEPSApp', ['restangular','ngRoute','ui.router'])
+angular.module('IEPSApp', ['restangular','ui.router'])
   .config(function ($stateProvider, $urlRouterProvider, RestangularProvider) {
+    //configurações do restangular
     RestangularProvider.setBaseUrl('api');
-    
-    $urlRouterProvider.otherwise("/");
+    RestangularProvider.setRequestSuffix('\/');
+    //#######################################
+
+    $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('main', {
         url: '/',
@@ -36,4 +39,9 @@ angular.module('IEPSApp', ['restangular','ngRoute','ui.router'])
         templateUrl: 'views/cadmembros.html',
         controller: 'CadmembrosCtrl'
       });
+  })
+  //ui-router definitions
+  .run(function ($rootScope, $state, $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
   });
