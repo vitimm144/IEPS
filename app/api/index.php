@@ -18,9 +18,76 @@ $r3->any('/connect', function(){
   }
   $obj_conexao->desconectar();
 });
+//**************************************************
+//Retorna um membro cadastrado recebendo como 
+//parametro a matricula do membro
+//**************************************************
 
+$r3->get('/membros/*', function($id){
+  header('HTTP/1.1 200 Ok');
+  $cadastro;
+  $obj_conexao = new conexao();
+  if(!$obj_conexao){
+    die ('sem conexao com o banco em resposta para requisição com ID');
+  }
+  try{
+    
+    $membro = $obj_conexao->query( 'SELECT * FROM dados_pessoais WHERE '
+            . 'matricula="'.$id.'"' );
+    $cadastro['membro'] = mysql_fetch_assoc( $membro );
+    
+  } catch ( Exception $e ) {
+    echo $e.'Erro em buscar membro com matrícula '.$id;
+  }
+  try{
+    $hist_familiar = $obj_conexao->query( 'SELECT * FROM historico_familiar WHERE '
+            . 'id_historico_familiar="'.$cadastro['membro']['id_historico_familiar'].'"' );
+    $cadastro['historico_familiar'] = mysql_fetch_assoc( $hist_familiar );
+  } catch ( Exception $e ) {
+    echo $e.'Erro em buscar historico familiar com o id'.$cadastro['membro']['id_historico_familiar'];
+  }
+  try{
+    $endereco = $obj_conexao->query( 'SELECT * FROM endereco WHERE '
+            . 'id_endereco="'.$cadastro['membro']['id_endereco'].'"' );
+    $cadastro['endereco'] = mysql_fetch_assoc( $endereco );
+  } catch ( Exception $e ) {
+    echo $e.'Erro em buscar endereco com o id'.$cadastro['membro']['id_endereco'];
+  }
+  try{
+    $contato = $obj_conexao->query( 'SELECT * FROM contato WHERE '
+            . 'id_contato="'.$cadastro['membro']['id_contato'].'"' );
+    $cadastro['contato'] = mysql_fetch_assoc( $contato );
+  } catch ( Exception $e ) {
+    echo $e.'Erro em buscar contato com o id'.$cadastro['membro']['id_contato'];
+  }
+  try{
+    $historico_eclesiastico = $obj_conexao->query( 'SELECT * FROM historico_eclesiastico WHERE '
+            . 'id_hist_eclesiastico="'.$cadastro['membro']['id_hist_eclesiastico'].'"' );
+    $cadastro['historico_eclesiastico'] = mysql_fetch_assoc( $historico_eclesiastico );
+  } catch ( Exception $e ) {
+    echo $e.'Erro em buscar historico_eclesiastico com o id'.$cadastro['membro']['id_hist_eclesiastico'];
+  }
+  try{
+    $cargo = $obj_conexao->query( 'SELECT * FROM cargo WHERE '
+            . 'id_cargo="'.$cadastro['historico_eclesiastico']['id_cargo'].'"' );
+    $cadastro['cargo'] = mysql_fetch_assoc( $cargo);
+  } catch ( Exception $e ) {
+    echo $e.'Erro em buscar cargo com o id'.$cadastro['historico_eclesiastico']['id_cargo'];
+  }
+  try{
+    $teologia = $obj_conexao->query( 'SELECT * FROM teologia WHERE '
+            . 'id_teologia="'.$cadastro['membro']['id_teologia'].'"' );
+    $cadastro['teologia'] = mysql_fetch_assoc( $teologia );
+  } catch ( Exception $e ) {
+    echo $e.'Erro em buscar historico_eclesiastico com o id'.$cadastro['membro']['id_teologia'];
+  }
+  return json_encode( $cadastro );
+});
+
+//********************************
 //retorna um array contendo todos os usuários
 //cadastrados no sistema
+//********************************
 
 $r3->get('/membros', function(){
   $obj_conexao = new conexao();
@@ -39,7 +106,6 @@ $r3->get('/membros', function(){
 //********************************
 //requisição de cadastro de membros
 //********************************
-
 
 $r3->post('/cadastro', function(){
   $obj_conexao = new conexao();
