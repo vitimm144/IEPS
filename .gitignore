@@ -5,4 +5,5 @@ dist
 app/bower_components
 api/vendor/
 app/api/vendor/respect/rest
+nbproject/*
 nbproject
