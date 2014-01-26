@@ -1,7 +1,14 @@
 'use strict';
 /*camelcase : false*/
 angular.module('IEPSApp')
-  .controller('CadmembrosCtrl', function ($scope, $http, Restangular) {
+  .controller('CadmembrosCtrl', function (
+  $scope,
+  $rootScope,
+  $state,
+  Restangular,
+  $stateParams
+  ) {
+
     $scope.cadastro = {};
     var cadastro = Restangular.all('cadastro');
     $scope.cadastro.membro = {
@@ -17,8 +24,7 @@ angular.module('IEPSApp')
     $scope.cadastro.teologia = {
       curso : '',
       instituicao : '',
-      duracao : '',
-      anexo : null
+      duracao : ''
     };
     $scope.cadastro.historico_familiar = {
       estado_civil : '',
@@ -51,10 +57,32 @@ angular.module('IEPSApp')
       igreja : '',
       cidade : ''
     };
-    $scope.salvar = function(){
-      cadastro.post($scope.cadastro).then(function(data){
-      }, function(){
-          console.log( 'nao salvou ');  
+
+    //caso o controller for usado pela tela de edição será feita uma
+    //requisição ao servidor para pegar os dados do membro para serem
+    //editados
+    if($stateParams.id){
+      Restangular.one('membros', $stateParams.id ).get().then(function(data){
+        $scope.cadastro = data;
       });
+    }
+
+    $scope.salvar = function(){
+      if($stateParams.id){
+        $scope.cadastro.put().then(function(){
+          $state.go('^');
+          $rootScope.$broadcast('update');
+        }, function(){
+          console.error('Erro ao cadastrar');
+        });
+      }else{
+        cadastro.post($scope.cadastro).then(function(data){
+          $state.go('^');
+          $rootScope.$broadcast('update');
+          
+        }, function(){
+            console.error( 'nao salvou!');  
+        });
+      }
     };
   });

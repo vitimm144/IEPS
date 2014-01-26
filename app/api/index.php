@@ -11,13 +11,15 @@ use Respect\Rest\Router;
 
 $r3 = new Router('/api');
 
-$r3->any('/connect', function(){
-  $obj_conexao = new conexao();
-  if(!$obj_conexao){
-    die ('Sem conexao com o banco');
-  }
-  $obj_conexao->desconectar();
-});
+/*
+ *Tratamento campo boolean pois o mysql não aceita tipo boolean 
+ */
+function boolean_to_int ( $value ){
+  $value ? $value = 1 : $value = 0;
+  return $value;
+}
+
+
 //**************************************************
 //Retorna um membro cadastrado recebendo como 
 //parametro a matricula do membro
@@ -82,6 +84,106 @@ $r3->get('/membros/*', function($id){
     echo $e.'Erro em buscar historico_eclesiastico com o id'.$cadastro['membro']['id_teologia'];
   }
   return json_encode( $cadastro );
+});
+
+$r3->put('/membros', function(){
+  $obj_conexao = new conexao();
+  
+  if(!$obj_conexao){
+    die ('Sem conexao com o banco');
+  }
+  $data = json_decode(file_get_contents('php://input'));
+  header('HTTP/1.1 200 Ok');
+  
+  $update_dados_pessoais = sprintf( "UPDATE dados_pessoais SET nome='%s', "
+    . "rg='%s', sexo='%s', data_nascimento='%s', "
+    . "tipo_sanguineo='%s', nome_mae='%s', profissao='%s', "
+    . "nome_pai='%s' WHERE matricula=".$data->membro->matricula.";",
+    mysql_real_escape_string($data->membro->nome),
+    mysql_real_escape_string($data->membro->rg),
+    mysql_real_escape_string($data->membro->sexo),
+    mysql_real_escape_string($data->membro->data_nascimento),
+    mysql_real_escape_string($data->membro->tipo_sanguineo),
+    mysql_real_escape_string($data->membro->nome_mae),
+    mysql_real_escape_string($data->membro->profissao),
+    mysql_real_escape_string($data->membro->nome_pai)
+  );
+  
+  $update_result['membro'] = $obj_conexao->query($update_dados_pessoais);
+  
+  
+  $update_historico_familiar = sprintf(
+    "UPDATE historico familiar SET estado_civil='%s', "
+    . "nome_conjuje='%s', data_casamento='%s',"
+    . " filhos=".boolean_to_int($data->historico_familiar->filhos).","
+    . " nr_filhos=".$data->historico_familiar->nr_filhos." WHERE "
+    . "id_historico_familiar=". $data->membro->id_historico_familiar.";",
+    mysql_real_escape_string($data->historico_familiar->estado_civil),
+    mysql_real_escape_string($data->historico_familiar->nome_conjuje),
+    mysql_real_escape_string($data->historico_familiar->data_casamento)
+  );
+  $update_result['historico_familiar'] = $obj_conexao->query($update_historico_familiar);
+  
+  $update_endereco = sprintf(
+    "UPDATE endereco SET logradouro='%s', numero='%s', bairro='%s',"
+    . " complemento='%s', cep='%s' WHERE id_endereco="
+    .$data->membro->id_endereco.";",
+    mysql_real_escape_string($data->endereco->logradouro),
+    mysql_real_escape_string($data->endereco->numero),
+    mysql_real_escape_string($data->endereco->bairro),
+    mysql_real_escape_string($data->endereco->complemento),
+    mysql_real_escape_string($data->endereco->cep)
+  );
+  
+  $update_result['endereco'] = $obj_conexao->query($update_endereco);
+  
+  $update_contato = sprintf(
+    "UPDATE contato SET residencial='%s', celular1='%s', celular2='%s',"
+    . " email='%s', facebook='%s' WHERE id_contato="
+    .$data->membro->id_contato.";",
+    mysql_real_escape_string($data->contato->residencial),      
+    mysql_real_escape_string($data->contato->celular1),      
+    mysql_real_escape_string($data->contato->celular2),      
+    mysql_real_escape_string($data->contato->email),      
+    mysql_real_escape_string($data->contato->facebook)      
+  );
+  
+  $update_result['contato'] = $obj_conexao->query($update_contato);
+  
+  $update_cargo = sprintf(
+    "UPDATE cargo SET cargo='%s', data_consagracao='%s', igreja='%s', "
+    . "cidade='%s' WHERE id_cargo=".$data->historico_eclesiastico->id_cargo.";",
+    mysql_real_escape_string($data->cargo->cargo),      
+    mysql_real_escape_string($data->cargo->data_consagracao),      
+    mysql_real_escape_string($data->cargo->igreja),      
+    mysql_real_escape_string($data->cargo->cidade)      
+  );
+  
+  $update_result['cargo'] = $obj_conexao->query($update_cargo);
+  
+  $update_historico_eclesiastico = sprintf(
+    "UPDATE historico_eclesiastico SET data_conversao='%s', data_batismo='%s'"
+    . " WHERE id_hist_eclesiastico="
+    .$data->membro->id_hist_eclesiastico.";",
+    mysql_real_escape_string($data->historico_eclesiastico->data_conversao),
+    mysql_real_escape_string($data->historico_eclesiastico->data_batismo)
+  );
+  
+  $update_result['historico_eclesiastico'] = $obj_conexao->query($update_historico_eclesiastico);
+  
+  $update_teologia = sprintf(
+    "UPDATE teologia SET curso='%s', instituicao='%s', duracao='%s' "
+    . "WHERE id_teologia=".$data->membro->id_teologia.";",
+    mysql_real_escape_string($data->teologia->curso),
+    mysql_real_escape_string($data->teologia->instituicao),
+    mysql_real_escape_string($data->teologia->duracao)
+  );
+  
+  $update_result['teologia'] = $obj_conexao->query($update_teologia);
+  echo json_encode($update_result).PHP_EOL;
+  echo $update_teologia.PHP_EOL;
+  
+  return json_encode($data);
 });
 
 //********************************
@@ -151,13 +253,6 @@ $r3->post('/cadastro', function(){
     echo 'erro em inserir cargo';
   }
   //verificar estado civil
-   
-  //Tratamento campo boolean pois o mysql não aceita tipo boolean
-  if ( $data->historico_familiar->filhos === true ) {
-    $data->historico_familiar->filhos = 1;
-  } else {
-    $data->historico_familiar->filhos = 0;
-  }
   
   $errorInsertHistFamiliar = $obj_conexao->query(
           "INSERT INTO historico_familiar(estado_civil, data_casamento, nome_conjuje, filhos, nr_filhos)
@@ -165,11 +260,11 @@ $r3->post('/cadastro', function(){
               .$data->historico_familiar->data_casamento."','"
               .$data->historico_familiar->nome_conjuje."',"
               //TODO tratamento do campo boolean armazenar no banco 0 ou 1
-              .$data->historico_familiar->filhos.","
+              .boolean_to_int($data->historico_familiar->filhos).","
               .$data->historico_familiar->nr_filhos.");"
   );
   if( $errorInsertHistFamiliar == false ) {
-    echo 'erro em inserir historico familiar';
+    echo 'erro em inserir historico familiar'.PHP_EOL;
   }
   $errorInsertTeologia = $obj_conexao->query(
           //TODO tratamento do tipo BLOB
@@ -273,7 +368,7 @@ $r3->post('/cadastro', function(){
   } catch (Exception $exc) {
     echo $exc->getTraceAsString();
   }
-  $data_nascimento = new DateTime($data->dados_pessoais->data_nascimento);
+  $data_nascimento = new DateTime($data->membro->data_nascimento);
   try {
     $errorInsertDadosPessoais = $obj_conexao->query(
       "INSERT INTO dados_pessoais(
@@ -291,14 +386,14 @@ $r3->post('/cadastro', function(){
         id_hist_eclesiastico, 
         id_teologia
         ) VALUES( '"
-        .$data->dados_pessoais->nome."','"
-        .$data->dados_pessoais->rg."','"
-        .$data->dados_pessoais->sexo."','"
+        .$data->membro->nome."','"
+        .$data->membro->rg."','"
+        .$data->membro->sexo."','"
         .$data_nascimento->format( 'Y-m-d' )."','"
-        .$data->dados_pessoais->tipo_sanguineo."','"
-        .$data->dados_pessoais->nome_mae."','"
-        .$data->dados_pessoais->profissao."','"
-        .$data->dados_pessoais->nome_pai."',"
+        .$data->membro->tipo_sanguineo."','"
+        .$data->membro->nome_mae."','"
+        .$data->membro->profissao."','"
+        .$data->membro->nome_pai."',"
         .$id_historico_familiar1.","
         .$id_endereco1.","
         .$id_contato1.","
@@ -316,5 +411,6 @@ $r3->post('/cadastro', function(){
 
 return;
 });
+
 
 print $r3->run();

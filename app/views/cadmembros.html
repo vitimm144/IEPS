@@ -1,9 +1,11 @@
 <div>
+<h3 ng-show='$stateParams.id' > Edição de Cadastro </h3>
+<h3 ng-show='!$stateParams.id' > Cadastro </h3>
 <form class="form-horizontal" name="hall_membros">
   <fieldset>
     <legend>Informações Pessoais</legend>
     <label class="">Nome</label>
-    <input class="" name="nome" data-ng-model="cadastro.dados_pessoais.nome"/>
+    <input class="" name="nome" data-ng-model="cadastro.membro.nome"/>
     
     <label>Logradouro</label>
     <input name="logradouro" data-ng-model="cadastro.endereco.logradouro"/>
@@ -16,14 +18,14 @@
     <label>CEP</label>
     <input name="cep" data-ng-model="cadastro.endereco.cep"/>
     <label>Profissão</label>
-    <input name="profissao" data-ng-model="cadastro.dados_pessoais.profissao"/>
+    <input name="profissao" data-ng-model="cadastro.membro.profissao"/>
     <label>Sexo</label>
-    <select name="sexo" data-ng-model="cadastro.dados_pessoais.sexo">
+    <select name="sexo" data-ng-model="cadastro.membro.sexo">
       <option>Masculino</option>
       <option>Feminino</option>
     </select>
     <label>RG</label>
-    <input name="rg" data-ng-model="cadastro.dados_pessoais.rg"/>
+    <input name="rg" data-ng-model="cadastro.membro.rg"/>
     <label>Telefone Residencial</label>
     <input name="residencial" data-ng-model="cadastro.contato.residencial"/>
     <label>Celular</label>
@@ -35,18 +37,18 @@
     <label>Facebook</label>
     <input name="facebook" data-ng-model="cadastro.contato.facebook"/>
     <label>Tipo Sanguíneo</label>
-    <input name="tipo_sanguineo" data-ng-model="cadastro.dados_pessoais.tipo_sanguineo"/>
+    <input name="tipo_sanguineo" data-ng-model="cadastro.membro.tipo_sanguineo"/>
     <label>Data de Nascimento</label>
-    <input name="data_nascimento" data-ng-model="cadastro.dados_pessoais.data_nascimento"/>
+    <input name="data_nascimento" data-ng-model="cadastro.membro.data_nascimento"/>
   </fieldset>
   <fieldset>
     <legend> Histórico Familiar </legend>
     <label>Estado Civil</label>
     <select name="estado_civil" data-ng-model="cadastro.historico_familiar.estado_civil">
-      <option> Solteiro(a) </option>
-      <option> Casado(a) </option>
-      <option> Divorciado(a) </option>
-      <option> Viúvo(a) </option>
+      <option>Solteiro(a)</option>
+      <option>Casado(a)</option>
+      <option>Divorciado(a)</option>
+      <option>Viúvo(a)</option>
     </select>
     <label>Data de Casamento</label>
     <input name="data_casamento" data-ng-model="cadastro.historico_familiar.data_casamento"/>
@@ -57,9 +59,9 @@
     <label> Nr Filhos </label>
     <input type="number" name="nr_filhos" data-ng-model="cadastro.historico_familiar.nr_filhos"/>
     <label> Nome Pai </label>
-    <input type="text" name="nome_pai" data-ng-model="cadastro.dados_pessoais.nome_pai"/>
+    <input type="text" name="nome_pai" data-ng-model="cadastro.membro.nome_pai"/>
     <label> Nome Mãe </label>
-    <input type="text" name="nome_mae" data-ng-model="cadastro.dados_pessoais.nome_mae"/>
+    <input type="text" name="nome_mae" data-ng-model="cadastro.membro.nome_mae"/>
   </fieldset>
   <fieldset>
     <legend> Teologia </legend>
@@ -98,6 +100,6 @@
   </fieldset>
   <button class="btn btn-primary" data-ng-click="salvar()"> Enviar </button>
   <button class="btn btn-warning" type="reset"> Limpar</button>
-  <a class='btn btn-danger' href="#/"> Cancelar</a>
+  <button class='btn btn-danger' type="button" ng-click="$state.go('^')"> Cancelar</button>
 </form>
 </div>
