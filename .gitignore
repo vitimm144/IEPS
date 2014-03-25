@@ -7,3 +7,17 @@ api/vendor/
 app/api/vendor/respect/rest
 nbproject/*
 nbproject
+bin
+build
+include
+lib
+local
+man
+share
+Scripts
+.Python
+*.pyc
+*~
+*.sqlite3
+.DS_Store
+.idea
