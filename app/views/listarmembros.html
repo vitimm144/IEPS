@@ -19,6 +19,7 @@
         <th> <span> Profissão </span> </th>
         <th> <span> Nome Pai </span> </th>
         <th> <span> Editar </span> </th>
+        <th> <span> Deletar </span> </th>
       </tr>
     </thread>
     <tbody>
@@ -31,7 +32,18 @@
         <td ng-bind="membro.nome_mae"></td>
         <td ng-bind="membro.profissao"></td>
         <td ng-bind="membro.nome_pai"></td>
-        <td> <a class="btn-info" href="/#/membros/{{membro.matricula}}"> Editar </a> </td>
+        <td> 
+          <a class="btn-info"
+             href="/#/membros/{{membro.matricula}}"
+             > Editar </a>
+        </td>
+        <td>
+          <button 
+            class="btn-danger"
+            type="button"
+            ng-click="deletar(membro)"
+            > Deletar </button> 
+        </td>
       </tr>
     </tbody>
   </table>

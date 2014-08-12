@@ -14,6 +14,12 @@ angular.module('IEPSApp')
          $scope.membros = data;
        });
      });
-     
+     $scope.deletar = function(data){
+       if(window.confirm('Tem certeza que deseja deletar esse registro?')){
+         data.remove().then(function(){
+           $scope.$broadcast('update');
+         });
+       }
+     };
      
   });

@@ -85,6 +85,54 @@ $r3->get('/membros/*', function($id){
   }
   return json_encode( $cadastro );
 });
+//***********************************
+//requisição para deletar um cadastro
+//***********************************
+$r3->delete('/membros', function(){
+  $obj_conexao = new conexao();
+  
+  if(!$obj_conexao){
+    die ('Sem conexao com o banco');
+  }
+  $data = json_decode(file_get_contents('php://input'));
+  header('HTTP/1.1 200 Ok');
+
+  $result_del['contato'] = $obj_conexao->query(
+    "DELETE from contato WHERE id_contato=".(int)$data->id_contato.";"
+  );
+
+  $result_del['endereco'] = $obj_conexao->query(
+    "DELETE from endereco WHERE id_endereco=".(int)$data->id_endereco.";"
+  );
+
+  $result_del['historico_familiar'] = $obj_conexao->query(
+    "DELETE from historico_familiar WHERE id_historico_familiar="
+      .(int)$data->id_historico_familiar.";"
+  );
+
+  $result_del['cargo']= $obj_conexao->query(
+    "DELETE from cargo WHERE id_cargo="
+      .(int)$data->historico_eclesiastico->id_cargo.";"
+  );
+
+  $result_del['historico_eclesiastico'] = $obj_conexao->query(
+    "DELETE from historico_eclesiastico WHERE id_hist_eclesiastico="
+      .(int)$data->id_hist_eclesiastico.";"
+  );
+
+  $result_del['teologia'] = $obj_conexao->query(
+    "DELETE from teologia WHERE id_teologia="
+      .(int)$data->id_teologia.";"
+  );
+
+  $result_del['membro'] = $obj_conexao->query(
+    "DELETE from dados_pessoais WHERE matricula="
+      .(int)$data->matricula.";"
+  );
+  echo json_encode($data->id_hist_eclesiastico).PHP_EOL;
+  echo json_encode($result_del).PHP_EOL;
+  return;
+});
 
 $r3->put('/membros', function(){
   $obj_conexao = new conexao();
@@ -183,7 +231,7 @@ $r3->put('/membros', function(){
   echo json_encode($update_result).PHP_EOL;
   echo $update_teologia.PHP_EOL;
   
-  return json_encode($data);
+  return $data;
 });
 
 //********************************
