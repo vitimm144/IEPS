@@ -3,6 +3,8 @@ node_js:
   - '0.8'
   - '0.10'
 before_script:
-  - 'cd frontend/'
-  - 'npm install -g bower grunt-cli'
-  - 'bower install'
+  - cd frontend
+  - mkdir -p $LOGS_DIR
+  - npm install -g bower grunt-cli karma-cli
+  - npm install 
+  - bower install
