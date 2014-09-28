@@ -9,7 +9,7 @@ from .serializers import UserSerializer
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):
 
-    model = User
+    queryset = User.objects.all()
     serializer_class = UserSerializer
     authentication_classes = (SessionAuthentication, BasicAuthentication)
     permission_classes = (IsAuthenticated,)

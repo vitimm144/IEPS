@@ -5,10 +5,9 @@ from rest_framework.reverse import reverse
 
 
 class ContasTestCase(TestCase):
-# Create your tests here.
 
     def setUp(self):
-        self.user = User.objects.get(pk=1)
+        self.user = User.objects.first()
 
     def test_list_user(self):
         response = self.client.get(reverse('user-list'))
