@@ -2,10 +2,12 @@ from django.conf.urls import patterns, include, url
 from rest_framework.routers import DefaultRouter
 from django.contrib import admin
 from contas.views import UserViewSet
+from membros.views import MembroViewSet
+
 
 router = DefaultRouter()
 router.register(r'contas', UserViewSet)
-
+router.register('membros', MembroViewSet)
 
 admin.autodiscover()
 
