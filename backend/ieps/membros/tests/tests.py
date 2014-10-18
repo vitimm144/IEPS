@@ -1,9 +1,9 @@
-from django.test import TestCase
-from django.core.urlresolvers import reverse
-from .models import Membro, HistoricoFamiliar, HistoricoEclesiastico, Endereco
-from .models import Teologia, Contato, Cargo
+from rest_framework.test import APITestCase
+from membros.models import Membro, HistoricoFamiliar, HistoricoEclesiastico, Endereco
+from membros.models import Teologia, Contato, Cargo
 
-class ContatoModelTestCase(TestCase):
+
+class ContatoModelTestCase(APITestCase):
 
     def Test_create_contato(self):
         contato = Contato(
@@ -17,7 +17,7 @@ class ContatoModelTestCase(TestCase):
         self.assertEqual(contato.pk, 1)
 
 
-class EnderecoModelTestCase(TestCase):
+class EnderecoModelTestCase(APITestCase):
 
     def test_create_endereco(self):
         endereco = Endereco(
@@ -31,7 +31,7 @@ class EnderecoModelTestCase(TestCase):
         self.assertEqual(endereco.pk, 1)
 
 
-class CargoModelTestCase(TestCase):
+class CargoModelTestCase(APITestCase):
 
     def test_create_cargo(self):
         cargo = Cargo(
@@ -44,7 +44,7 @@ class CargoModelTestCase(TestCase):
         self.assertEqual(cargo.pk, 1)
 
 
-class HistoricoEclesiasticoModelTestCase(TestCase):
+class HistoricoEclesiasticoModelTestCase(APITestCase):
 
     def test_create_historicoEclesiastico(self):
         historico_eclesiastico = HistoricoEclesiastico(
@@ -56,7 +56,7 @@ class HistoricoEclesiasticoModelTestCase(TestCase):
         self.assertEqual(historico_eclesiastico.pk, 1)
 
 
-class TeologiaModelTestCase(TestCase):
+class TeologiaModelTestCase(APITestCase):
 
     def test_create_teologia(self):
         teologia = Teologia(
@@ -68,7 +68,7 @@ class TeologiaModelTestCase(TestCase):
         self.assertEqual(teologia.pk, 1)
 
 
-class HistoricoFamiliarModelTestCase(TestCase):
+class HistoricoFamiliarModelTestCase(APITestCase):
 
     def test_create_historico_familiar(self):
         historico_familiar= HistoricoFamiliar(
@@ -82,7 +82,7 @@ class HistoricoFamiliarModelTestCase(TestCase):
         self.assertEqual(historico_familiar.pk, 1)
 
 
-class MembroModelTestCase(TestCase):
+class MembroModelTestCase(APITestCase):
 
     def test_create_membro(self):
         membro = Membro(
