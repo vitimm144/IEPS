@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from .serializers import MembroSerializer
-from .models import Membro
+from membros.models import Membro
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 

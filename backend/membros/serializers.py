@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Membro
+from membros.models import Membro
 
 
 class MembroSerializer(serializers.ModelSerializer):
