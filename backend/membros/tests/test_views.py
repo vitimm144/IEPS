@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class MembroViewTestCase(APITestCase):
 
-    fixtures = ['auth', 'user']
+    fixtures = ['auth_user', 'auth_permission']
 
     def setUp(self):
         self.user = User.objects.get(username='admin')

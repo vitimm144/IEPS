@@ -5,7 +5,7 @@ from rest_framework.reverse import reverse
 
 
 class ContasTestCase(APITestCase):
-    fixtures = ['auth',]
+    fixtures = ['auth_user',]
 
     def setUp(self):
         self.user = User.objects.get(username='admin')

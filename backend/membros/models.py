@@ -71,7 +71,7 @@ class Membro(models.Model):
         ('M', 'Masculino'),
         ('F', 'Feminino'),
     )
-    matricula = models.PositiveIntegerField(primary_key=True, auto_created=True)
+    matricula = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100, verbose_name='Nome')
     rg = models.CharField(max_length=15, verbose_name='RG', null=True)
     sexo = models.CharField(max_length=1, choices=SEXO, verbose_name='Sexo')
