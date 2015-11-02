@@ -3,11 +3,20 @@ from django.db import models
 
 class Contato(models.Model):
 
-    residencial = models.CharField(max_length=20, verbose_name='Residencial', null=True)
-    celular1 = models.CharField(max_length=20, verbose_name='Celular 1', null=True)
-    celular2 = models.CharField(max_length=20, verbose_name='Celular 1', null=True)
-    email = models.EmailField()
-    facebook = models.CharField(max_length=50, verbose_name='Facebook', null=True)
+    residencial = models.CharField(max_length=20, verbose_name='Residencial', null=True, blank=True)
+    celular1 = models.CharField(max_length=20, verbose_name='Celular 1', null=True, blank=True)
+    celular2 = models.CharField(max_length=20, verbose_name='Celular 1', null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    facebook = models.CharField(max_length=50, verbose_name='Facebook', null=True, blank=True)
+    membro = models.OneToOneField(
+        'membros.Membro',
+        verbose_name='Membro'
+    )
+
+    def __str__(self):
+        return "%s" % (
+            self.residencial if self.residencial else self.celular1
+        )
 
 
 class Endereco(models.Model):
@@ -17,9 +26,15 @@ class Endereco(models.Model):
     bairro = models.CharField(max_length=50, verbose_name='Bairro')
     complemento = models.CharField(max_length=50, verbose_name='Complemento', null=True, blank=True)
     cep = models.CharField(max_length=10, verbose_name='CEP', null=True, blank=True)
+    membro = models.OneToOneField(
+        'membros.Membro',
+        verbose_name='Membro'
+    )
 
     def __str__(self):
-        return self.bairro
+        return "%s, %s, %s" % (
+            self.logradouro, self.bairro, self.numero
+            )
 
 
 class Cargo(models.Model):
@@ -38,6 +53,10 @@ class HistoricoEclesiastico(models.Model):
     data_conversao = models.DateField(verbose_name='Data conversão', null=True)
     data_batismo = models.DateField(verbose_name='Data batismo', null=True)
     cargo = models.ForeignKey('Cargo', related_name='cargos', null=True, on_delete=models.SET_NULL)
+    membro = models.OneToOneField(
+        'membros.Membro',
+        verbose_name='Membro'
+    )
 
 
 class Teologia(models.Model):
@@ -45,6 +64,10 @@ class Teologia(models.Model):
     curso = models.CharField(max_length=100, verbose_name='Curso')
     instituicao = models.CharField(max_length=100, verbose_name='Instituição')
     duracao = models.CharField(max_length=20, verbose_name='Duração')
+    membro = models.OneToOneField(
+        'membros.Membro',
+        verbose_name='Membro'
+    )
     # anexos = models.FileField(null=True)
 
     def __str__(self):
@@ -64,6 +87,10 @@ class HistoricoFamiliar(models.Model):
     nome_conjuje = models.CharField(max_length=100, verbose_name='Nome conjuje', null=True)
     filhos = models.BooleanField(verbose_name='Filhos?', default=False)
     nr_filhos = models.PositiveIntegerField(verbose_name='Número de filhos')
+    membro = models.OneToOneField(
+        'membros.Membro',
+        verbose_name='Membro'
+    )
 
 
 class Membro(models.Model):
@@ -79,11 +106,6 @@ class Membro(models.Model):
     tipo_sanguineo = models.CharField(max_length=3, verbose_name='Tipo sanguineo', null=True)
     nome_mae = models.CharField(max_length=100, verbose_name='Nome da mãe', null=True)
     nome_pai = models.CharField(max_length=100, verbose_name='Nome do pai', null=True)
-    endereco = models.ForeignKey('Endereco', related_name='endereco', null=True)
-    historico_familiar = models.ForeignKey('HistoricoFamiliar', related_name='historico_familiar', null=True)
-    contato = models.ForeignKey('Contato', related_name='contato', null=True)
-    historico_eclesiastico = models.ForeignKey('HistoricoEclesiastico', related_name='historico_eclesiastico', null=True)
-    teologia = models.ForeignKey('Teologia', related_name='teologia', null=True)
 
     def __str__(self):
         return self.nome

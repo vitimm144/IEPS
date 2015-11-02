@@ -10,3 +10,4 @@ markdown
 django-filter
 psycopg2
 ipdb
+django-extensions

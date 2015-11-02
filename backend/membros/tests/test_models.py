@@ -5,13 +5,18 @@ from membros.models import Teologia, Contato, Cargo
 
 class ContatoModelTestCase(APITestCase):
 
+    fixtures = [
+        'membros'
+    ]
+
     def Test_create_contato(self):
         contato = Contato(
             residencial='123123',
             celular1='111',
             celular2='222',
             email='bla@bla.com',
-            facebook='face@face.com'
+            facebook='face@face.com',
+            membro_id=1
         )
         contato.save()
         self.assertEqual(contato.pk, 1)
@@ -19,13 +24,18 @@ class ContatoModelTestCase(APITestCase):
 
 class EnderecoModelTestCase(APITestCase):
 
+    fixtures = [
+        'membros'
+    ]
+
     def test_create_endereco(self):
         endereco = Endereco(
             logradouro='Rua das ruas',
             numero='1234',
             bairro='bairro',
             complemento='complemento',
-            cep='12354'
+            cep='12354',
+            membro_id=1
         )
         endereco.save()
         self.assertEqual(endereco.pk, 1)
@@ -46,11 +56,16 @@ class CargoModelTestCase(APITestCase):
 
 class HistoricoEclesiasticoModelTestCase(APITestCase):
 
+    fixtures = [
+        'membros'
+    ]
+
     def test_create_historicoEclesiastico(self):
         historico_eclesiastico = HistoricoEclesiastico(
             data_conversao='2003-02-01',
             data_batismo='2003-03-16',
-            cargo_id=1
+            cargo_id=1,
+            membro_id=1
         )
         historico_eclesiastico.save()
         self.assertEqual(historico_eclesiastico.pk, 1)
@@ -58,11 +73,16 @@ class HistoricoEclesiasticoModelTestCase(APITestCase):
 
 class TeologiaModelTestCase(APITestCase):
 
+    fixtures = [
+        'membros'
+    ]
+
     def test_create_teologia(self):
         teologia = Teologia(
             curso='Curso',
             instituicao='Instituicao',
-            duracao='2 anos'
+            duracao='2 anos',
+            membro_id=1
         )
         teologia.save()
         self.assertEqual(teologia.pk, 1)
@@ -70,13 +90,18 @@ class TeologiaModelTestCase(APITestCase):
 
 class HistoricoFamiliarModelTestCase(APITestCase):
 
+    fixtures = [
+        'membros'
+    ]
+
     def test_create_historico_familiar(self):
         historico_familiar= HistoricoFamiliar(
             estado_civil='C',
             data_casamento='2007-10-13',
             nome_conjuje='Conjuje',
             filhos=False,
-            nr_filhos=0
+            nr_filhos=0,
+            membro_id=1
         )
         historico_familiar.save()
         self.assertEqual(historico_familiar.pk, 1)
@@ -94,11 +119,6 @@ class MembroModelTestCase(APITestCase):
             tipo_sanguineo='A+',
             nome_mae='Mae',
             nome_pai='Pai',
-            endereco_id=1,
-            historico_familiar_id=1,
-            contato_id=1,
-            historico_eclesiastico_id=1,
-            teologia_id=1
         )
         membro.save()
         self.assertEqual(membro.pk, 1)
