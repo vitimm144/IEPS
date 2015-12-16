@@ -58,6 +58,10 @@ class HistoricoEclesiastico(models.Model):
         verbose_name='Membro'
     )
 
+    def cargo_names(self):
+        return ', '.join([a.cargo for a in self.cargos.all()])
+    cargo_names.short_description = "Cargos"
+
 
 class Teologia(models.Model):
 

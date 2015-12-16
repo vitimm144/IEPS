@@ -38,7 +38,27 @@ class HistoricoEclesiasticoInline(admin.StackedInline):
 
 
 class HistoricoEclesiasticoAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('data_conversao', 'data_batismo', 'membro', 'cargo_names')
+    list_filter = ('data_conversao', 'data_batismo', 'membro')
+    search_fields = ('data_conversao', 'data_batismo', 'membro__nome')
+
+
+class TeologiaAdmin(admin.ModelAdmin):
+    list_display = ('curso', 'instituição', 'duracao', 'membro')
+    list_filter = ('curso', 'instituição', 'duracao', 'membro')
+    seach_fields = ('curso', 'instituição', 'duracao', 'membro__nome')
+
+
+class EnderecoAdmin(admin.ModelAdmin):
+    list_display = ('logradouro', 'numero', 'bairro', 'cep', 'membro')
+    list_filter = ('logradouro', 'numero', 'bairro', 'cep', 'membro')
+    search_fields = ('logradouro', 'bairro', 'cep', 'membro__nome')
+
+
+class ContatoAdmin(admin.ModelAdmin):
+    list_display = ('residencial', 'celular1', 'celular2', 'membro')
+    list_filter = ('residencial', 'celular1', 'celular2', 'membro')
+    search_fields = ('residencial', 'celular1', 'celular2', 'membro__nome')
 
 
 class MembroAdmin(admin.ModelAdmin):
@@ -51,14 +71,17 @@ class MembroAdmin(admin.ModelAdmin):
     )
     list_display = ('matricula', 'nome', 'data_nascimento', 'endereco', 'contato')
     list_filter = ('matricula', 'nome', 'sexo', 'data_nascimento',)
+    search_fields = ('matricula', 'nome', 'data_nascimento', 'endereco', 'contato')
 
 
 class CargoAdmin(admin.ModelAdmin):
     list_display = ('cargo', 'data_consagracao', 'igreja', 'cidade',)
     list_filter = ('cargo', 'igreja', 'cidade',)
-
+    search_fields = ('cargo', 'data_consagracao', 'igreja', 'cidade')
 
 # Register your models here.
 admin_site.register(Membro, MembroAdmin)
 admin_site.register(Cargo, CargoAdmin)
 admin_site.register(HistoricoEclesiastico, HistoricoEclesiasticoAdmin)
+admin_site.register(Endereco, EnderecoAdmin)
+admin_site.register(Contato, ContatoAdmin)
