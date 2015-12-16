@@ -37,6 +37,10 @@ class HistoricoEclesiasticoInline(admin.StackedInline):
     verbose_name_plural = 'Históricos eclesiásticos'
 
 
+class HistoricoEclesiasticoAdmin(admin.ModelAdmin):
+    pass
+
+
 class MembroAdmin(admin.ModelAdmin):
     inlines = (
         EnderecoInline,
@@ -57,3 +61,4 @@ class CargoAdmin(admin.ModelAdmin):
 # Register your models here.
 admin_site.register(Membro, MembroAdmin)
 admin_site.register(Cargo, CargoAdmin)
+admin_site.register(HistoricoEclesiastico, HistoricoEclesiasticoAdmin)

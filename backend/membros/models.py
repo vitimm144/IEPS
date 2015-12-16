@@ -52,7 +52,7 @@ class HistoricoEclesiastico(models.Model):
 
     data_conversao = models.DateField(verbose_name='Data conversão', null=True)
     data_batismo = models.DateField(verbose_name='Data batismo', null=True)
-    cargo = models.ForeignKey('Cargo', related_name='cargos', null=True, on_delete=models.SET_NULL)
+    cargos = models.ManyToManyField('Cargo', related_name='cargos', blank=True)
     membro = models.OneToOneField(
         'membros.Membro',
         verbose_name='Membro'
