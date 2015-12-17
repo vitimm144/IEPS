@@ -71,7 +71,13 @@ class MembroAdmin(admin.ModelAdmin):
     )
     list_display = ('matricula', 'nome', 'data_nascimento', 'endereco', 'contato')
     list_filter = ('matricula', 'nome', 'sexo', 'data_nascimento',)
-    search_fields = ('matricula', 'nome', 'data_nascimento', 'endereco', 'contato')
+    search_fields = (
+        'matricula',
+        'nome',
+        'data_nascimento',
+        'endereco__logradouro',
+        'endereco__numero'
+    )
 
 
 class CargoAdmin(admin.ModelAdmin):
@@ -79,9 +85,17 @@ class CargoAdmin(admin.ModelAdmin):
     list_filter = ('cargo', 'igreja', 'cidade',)
     search_fields = ('cargo', 'data_consagracao', 'igreja', 'cidade')
 
+
+class HistoricoFamiliarAdmin(admin.ModelAdmin):
+    list_display = ('estado_civil', 'data_casamento', 'nome_conjuje', 'membro')
+    list_filter = ('estado_civil', 'data_casamento', 'nome_conjuje', 'membro')
+    search_fields = ('estado_civil', 'data_casamento', 'nome_conjuje', 'membro__nome')
+
+
 # Register your models here.
 admin_site.register(Membro, MembroAdmin)
 admin_site.register(Cargo, CargoAdmin)
 admin_site.register(HistoricoEclesiastico, HistoricoEclesiasticoAdmin)
 admin_site.register(Endereco, EnderecoAdmin)
 admin_site.register(Contato, ContatoAdmin)
+admin_site.register(HistoricoFamiliar, HistoricoFamiliarAdmin)
